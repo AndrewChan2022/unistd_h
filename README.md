@@ -22,3 +22,36 @@ implements the following functions:
 - rmdir
 - unlink
 
+
+# build
+
+```bash
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=windowsbuild/unistd
+cmake --build build --target install --config Release -- /m
+```
+
+# usage
+
+```bash
+
+cmake_minimum_required(VERSION 3.12)
+project(testunistd C)
+
+# add to windows env path or manually add to CMAKE_PREFIX_PATH
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../windowsbuild/unistd)
+find_package(unistd REQUIRED)
+
+add_executable(${PROJECT_NAME} main.c)
+target_link_libraries(${PROJECT_NAME} PRIVATE unistd::unistd)
+
+```
+
+# test
+
+```bash
+cd test
+cmake -S . -B build
+cmake --build build
+
+build\Debug\testunistd.exe
+```

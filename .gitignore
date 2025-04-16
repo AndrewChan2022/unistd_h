@@ -1,3 +1,6 @@
 .vs
 build
 out
+.vscode
+windowsbuild
+test/build
